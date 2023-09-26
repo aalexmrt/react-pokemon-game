@@ -2,7 +2,7 @@ import Card from '../Card'
 
 import './index.css'
 
-const CardList = ({ pokemonsWithClones, handleClick }) => {
+const CardList = ({ pokemonsWithClones, selectionDisabled, handleClick }) => {
   // Check if pokemonsListIdClones is truthy
   if (!pokemonsWithClones) {
     return null // Return null or some other fallback component
@@ -13,22 +13,23 @@ const CardList = ({ pokemonsWithClones, handleClick }) => {
       {pokemonsWithClones.map((item, index) => {
         const { visible, image } = item
         return (
-          <div
-            className={
-              visible
-                ? 'pokemon-card-box card-inner-rotation'
-                : 'pokemon-card-box'
-            }
-            key={index}
-            onClick={
-              visible
-                ? () => {}
-                : () => {
-                    handleClick(item, index)
-                  }
-            }
-          >
-            <Card image={image} />
+          <div key={index} className="pokemon-card-rounded">
+            <div
+              className={
+                visible
+                  ? 'pokemon-card-box card-inner-rotation'
+                  : 'pokemon-card-box'
+              }
+              onClick={
+                visible || selectionDisabled
+                  ? () => {}
+                  : () => {
+                      handleClick(item, index)
+                    }
+              }
+            >
+              <Card image={image} />
+            </div>
           </div>
         )
       })}

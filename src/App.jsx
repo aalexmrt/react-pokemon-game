@@ -1,43 +1,38 @@
-import { useEffect, useState, useCallback } from 'react'
-import './App.css'
-import { BoardGame } from './components/BoardGame'
-import { getRandomNumbers } from './utils'
+import { useEffect, useState, useRef } from 'react'
+import { playMatchedSound, playFailedSound } from './utils'
+
 import { ScorePanel } from './components/ScorePanel'
-import { usePokemons } from './hooks/usePokemons'
-
-import getPokemons from './services/getPokemons'
-import Card from './components/Card'
+import Spinner from './components/Spinner'
+import Modal from './components/Modal'
 import CardList from './components/CardList'
-const TIME = 30
-const SCORE = 0
 
-// function useSelectedPokemons() {
-//   const [selectedPokemon, setSelectedPokemon] = useState([])
+import { usePokemons } from './hooks/usePokemons'
+import { useTimer } from './hooks/useTimer'
 
-//   const resetSelectedPokemons = () => {
-//     setSelectedPokemon([])
-//   }
+import './App.css'
 
-//   return { selectedPokemon, setSelectedPokemon, resetSelectedPokemons }
-// }
+const INITIAL_TIMER = 90
 
-// function checkPokemons(pokemonArray) {
-//   console.log('je')
-//   if (pokemonArray[0].pokemonId === pokemonArray[1].pokemonId) {
-//     console.log('matched')
-//     return true
-//   } else {
-//     console.log('no matched')
-//     return false
-//   }
-// }
+function checkPokemonsMatch(pokemonArray) {
+  if (pokemonArray[0].pokemonId === pokemonArray[1].pokemonId) {
+    return true
+  } else {
+    return false
+  }
+}
 
 export default function App() {
-  const { pokemons } = usePokemons()
   const [pokemonsWithClones, setPokemonsWithClones] = useState()
+  const [selectedPokemon, setSelectedPokemon] = useState([])
+  const [selectionDisabled, setSelectionDisabled] = useState(false)
+  const [score, setScore] = useState(0)
+  const [endGame, setEndGame] = useState(false)
+  const [win, setWin] = useState(false)
+
+  const { pokemons, setRefresh, loading } = usePokemons(8)
+  const { timeLeft, setTimeLeft } = useTimer(INITIAL_TIMER, setEndGame)
 
   useEffect(() => {
-    console.log('use effect')
     if (pokemons) {
       setPokemonsWithClones(
         pokemons.reduce((acc, value, index) => {
@@ -60,24 +55,77 @@ export default function App() {
   }, [pokemons])
 
   const handleClick = (pokemon, index) => {
-    console.log(pokemon)
     pokemon.visible = true
+    if (!pokemon.index) {
+      pokemon.index = index
+    }
 
     const newPokemons = [...pokemonsWithClones]
     newPokemons[index] = pokemon
-    console.log(newPokemons)
     setPokemonsWithClones(newPokemons)
+
+    const newSelectedPokemon = [...selectedPokemon, pokemon]
+    setSelectedPokemon(newSelectedPokemon)
+
+    if (selectedPokemon.length === 1) {
+      setSelectionDisabled(true)
+      if (checkPokemonsMatch(newSelectedPokemon)) {
+        // matched
+        const newScore = score + 1
+        setScore(newScore)
+        playMatchedSound()
+
+        if (newScore === pokemons.length) {
+          setWin(true)
+          setEndGame(true)
+        }
+        setSelectedPokemon([])
+        setSelectionDisabled(false)
+      } else {
+        // no matched
+
+        setTimeout(() => {
+          newPokemons[newSelectedPokemon[0].index].visible = false
+          newPokemons[newSelectedPokemon[1].index].visible = false
+          playFailedSound()
+          setPokemonsWithClones(newPokemons)
+          setSelectedPokemon([])
+          setSelectionDisabled(false)
+        }, 300)
+      }
+    }
   }
-  console.log(pokemonsWithClones)
+
+  const handleReset = () => {
+    setRefresh(true)
+    setSelectedPokemon([])
+    setScore(0)
+    setEndGame(false)
+    setTimeLeft(INITIAL_TIMER)
+    setWin(false)
+  }
   return (
     <>
+      <header>
+        <ScorePanel
+          handleReset={handleReset}
+          time={timeLeft}
+          score={score}
+        ></ScorePanel>
+      </header>
       <main>
-        <section>
-          <CardList
-            pokemonsWithClones={pokemonsWithClones}
-            handleClick={handleClick}
-          ></CardList>
-        </section>
+        {loading ? (
+          <Spinner></Spinner>
+        ) : (
+          <section>
+            <CardList
+              pokemonsWithClones={pokemonsWithClones}
+              selectionDisabled={selectionDisabled}
+              handleClick={handleClick}
+            ></CardList>
+            <Modal endGame={endGame} win={win} resetGame={handleReset}></Modal>
+          </section>
+        )}
       </main>
     </>
   )

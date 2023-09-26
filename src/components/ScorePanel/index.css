@@ -4,8 +4,28 @@
   align-items: center;
   justify-content: center;
 }
+.subtitles-score-panel {
+  font-size: 2.1rem;
+  padding-bottom: 0.4rem;
+}
 .timer,
 .scoring {
-  font-size: 1.2rem;
+  font-size: 1.9rem;
   font-weight: 600;
+}
+
+.btn-score-panel {
+  padding: 1rem;
+  padding-left: 1.4rem;
+  padding-right: 1.4rem;
+
+  border-radius: 1rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #000000;
+  background-color: #ffffff;
+  border: 0;
+}
+.btn-score-panel:hover {
+  transform: scale(1.02);
 }
