@@ -40,8 +40,6 @@ export const playMatchedSound = () => {
 }
 
 export const playFailedSound = () => {
-  console.log(failedSound)
-
   const audio = new Audio(failedSound)
   audio.play()
 }

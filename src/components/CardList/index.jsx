@@ -2,18 +2,14 @@ import Card from '../Card'
 
 import './index.css'
 
-const CardList = ({ pokemonsWithClones, selectionDisabled, handleClick }) => {
-  // Check if pokemonsListIdClones is truthy
-  if (!pokemonsWithClones) {
-    return null // Return null or some other fallback component
-  }
-  // Use map to render the list items
+const CardList = ({ pokemonsWithClones, disableClick, handleClick }) => {
+  if (!pokemonsWithClones) return
   return (
     <>
-      {pokemonsWithClones.map((item, index) => {
+      {pokemonsWithClones.map((item, id) => {
         const { visible, image } = item
         return (
-          <div key={index} className="pokemon-card-rounded">
+          <div key={id} className="pokemon-card-rounded">
             <div
               className={
                 visible
@@ -21,10 +17,10 @@ const CardList = ({ pokemonsWithClones, selectionDisabled, handleClick }) => {
                   : 'pokemon-card-box'
               }
               onClick={
-                visible || selectionDisabled
+                visible || disableClick
                   ? () => {}
                   : () => {
-                      handleClick(item, index)
+                      handleClick(item, id)
                     }
               }
             >

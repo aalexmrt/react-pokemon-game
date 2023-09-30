@@ -1,12 +1,16 @@
 import { useEffect, useState } from 'react'
 import { getRandomNumbers } from '../utils'
 import getPokemons from '../services/getPokemons'
-export function usePokemons(size) {
-  const randomsNum = getRandomNumbers(size)
+export function usePokemons({ totalPokemons }) {
+  const randomsNum = getRandomNumbers(totalPokemons)
   const [pokemondata, setPokemondata] = useState(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
   const [refresh, setRefresh] = useState(false)
+
+  const refreshPokemons = () => {
+    return setRefresh(true)
+  }
 
   useEffect(() => {
     if (refresh) {
@@ -22,5 +26,5 @@ export function usePokemons(size) {
     }
   }, [setPokemondata, refresh])
 
-  return { pokemons: pokemondata, setRefresh, loading, error }
+  return { pokemons: pokemondata, refreshPokemons, loading, error }
 }

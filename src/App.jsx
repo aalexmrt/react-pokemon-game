@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { playMatchedSound, playFailedSound } from './utils'
 
 import { ScorePanel } from './components/ScorePanel'
@@ -6,8 +6,9 @@ import Spinner from './components/Spinner'
 import Modal from './components/Modal'
 import CardList from './components/CardList'
 
-import { usePokemons } from './hooks/usePokemons'
-import { useTimer } from './hooks/useTimer'
+import { usePokemons } from './hooks/usePokemons.js'
+import { useTimer } from './hooks/useTimer.js'
+import { usePokemonsClone } from './hooks/usePokemonsClone'
 
 import './App.css'
 
@@ -22,53 +23,32 @@ function checkPokemonsMatch(pokemonArray) {
 }
 
 export default function App() {
-  const [pokemonsWithClones, setPokemonsWithClones] = useState()
+  const { pokemons, refreshPokemons, loading } = usePokemons({
+    totalPokemons: 8,
+  })
+  const { pokemonsWithClones, setPokemonsWithClones } = usePokemonsClone({
+    pokemons,
+  })
   const [selectedPokemon, setSelectedPokemon] = useState([])
-  const [selectionDisabled, setSelectionDisabled] = useState(false)
+  const [disableClick, setDisableClick] = useState(false)
   const [score, setScore] = useState(0)
   const [endGame, setEndGame] = useState(false)
   const [win, setWin] = useState(false)
 
-  const { pokemons, setRefresh, loading } = usePokemons(8)
   const { timeLeft, setTimeLeft } = useTimer(INITIAL_TIMER, setEndGame)
 
-  useEffect(() => {
-    if (pokemons) {
-      setPokemonsWithClones(
-        pokemons.reduce((acc, value, index) => {
-          const pokemon = {
-            id: index + 1,
-            visible: false,
-            ...value,
-          }
-          const clonedPokemon = {
-            ...pokemon,
-            id: index + 100,
-          }
-          acc.push(pokemon)
-          acc.push(clonedPokemon)
-          acc.sort(() => Math.random() - 0.5)
-          return acc
-        }, [])
-      )
-    }
-  }, [pokemons])
-
-  const handleClick = (pokemon, index) => {
+  const handleClick = (pokemon, id) => {
     pokemon.visible = true
-    if (!pokemon.index) {
-      pokemon.index = index
-    }
 
     const newPokemons = [...pokemonsWithClones]
-    newPokemons[index] = pokemon
+    newPokemons[id] = pokemon
     setPokemonsWithClones(newPokemons)
 
     const newSelectedPokemon = [...selectedPokemon, pokemon]
     setSelectedPokemon(newSelectedPokemon)
 
     if (selectedPokemon.length === 1) {
-      setSelectionDisabled(true)
+      setDisableClick(true)
       if (checkPokemonsMatch(newSelectedPokemon)) {
         // matched
         const newScore = score + 1
@@ -80,24 +60,24 @@ export default function App() {
           setEndGame(true)
         }
         setSelectedPokemon([])
-        setSelectionDisabled(false)
+        setDisableClick(false)
       } else {
         // no matched
 
         setTimeout(() => {
-          newPokemons[newSelectedPokemon[0].index].visible = false
-          newPokemons[newSelectedPokemon[1].index].visible = false
+          newPokemons[newSelectedPokemon[0].id].visible = false
+          newPokemons[newSelectedPokemon[1].id].visible = false
           playFailedSound()
           setPokemonsWithClones(newPokemons)
           setSelectedPokemon([])
-          setSelectionDisabled(false)
+          setDisableClick(false)
         }, 300)
       }
     }
   }
 
   const handleReset = () => {
-    setRefresh(true)
+    refreshPokemons()
     setSelectedPokemon([])
     setScore(0)
     setEndGame(false)
@@ -120,7 +100,7 @@ export default function App() {
           <section>
             <CardList
               pokemonsWithClones={pokemonsWithClones}
-              selectionDisabled={selectionDisabled}
+              disableClick={disableClick}
               handleClick={handleClick}
             ></CardList>
             <Modal endGame={endGame} win={win} resetGame={handleReset}></Modal>

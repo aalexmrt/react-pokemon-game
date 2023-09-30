@@ -22,7 +22,6 @@
   padding-top: 6.5rem;
   padding-bottom: 6.5rem;
   border-radius: 4%;
-
   font-size: 4rem;
 }
 
@@ -39,4 +38,15 @@
 }
 .btn-modal:hover {
   transform: scale(1.1);
+}
+
+@media screen and (max-width: 768px) {
+  .box-win-msg {
+    row-gap: 3rem;
+    padding-left: 4rem;
+    padding-right: 4rem;
+  }
+  .box-win-msg > h1 {
+    font-size: 3rem;
+  }
 }
