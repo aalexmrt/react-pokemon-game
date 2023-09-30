@@ -1,4 +1,4 @@
-export function getPokemons(randomsNum) {
+export function SearchPokemons(randomsNum) {
   return Promise.all(
     Array.from(randomsNum, (id) =>
       fetch(`https://pokeapi.co/api/v2/pokemon/${id}`)
@@ -11,4 +11,3 @@ export function getPokemons(randomsNum) {
     )
   )
 }
-export default getPokemons

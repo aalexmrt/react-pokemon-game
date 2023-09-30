@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react'
 import { getRandomNumbers } from '../utils'
-import getPokemons from '../services/getPokemons'
+import { SearchPokemons } from '../services/search-pokemons'
+
 export function usePokemons({ totalPokemons }) {
-  const randomsNum = getRandomNumbers(totalPokemons)
+  const randomsNum = getRandomNumbers({ totalPokemons })
   const [pokemondata, setPokemondata] = useState(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
@@ -18,7 +19,7 @@ export function usePokemons({ totalPokemons }) {
     }
     try {
       setLoading(true)
-      getPokemons(randomsNum).then(setPokemondata)
+      SearchPokemons(randomsNum).then(setPokemondata)
     } catch (err) {
       setError(err)
     } finally {
