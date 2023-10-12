@@ -1,0 +1,32 @@
+.pokemon-card-rounded {
+  position: relative;
+  transition: transform 0.3s;
+  transform-style: preserve-3d;
+}
+
+.flipped {
+  transform: rotateY(180deg);
+}
+
+.front-card,
+.back-card {
+  backface-visibility: hidden;
+  height: 100%;
+  width: 100%;
+}
+
+.back-card {
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform: rotateY(180deg);
+  will-change: transform;
+}
+
+.spinner-box {
+  grid-column: 1 / -1;
+}
+.overflow-hidden {
+  overflow: hidden;
+  border-radius: 0.5rem;
+}

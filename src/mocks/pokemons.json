@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "pokemonId": 5,
+    "name": "charmeleon",
+    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/5.svg",
+    "show": false
+  },
+  {
+    "id": 2,
+    "pokemonId": 4,
+    "name": "charmander",
+    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/4.svg",
+    "show": false
+  },
+  {
+    "id": 3,
+    "pokemonId": 3,
+    "name": "venusaur",
+    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/3.svg",
+    "show": false
+  }
+]

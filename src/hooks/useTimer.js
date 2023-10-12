@@ -1,15 +1,27 @@
 import { useEffect, useState } from 'react'
+import { USE_TIMER_INITIAL_STATE } from 'src/utils/consts'
 
-export function useTimer(seconds, setEndGame) {
+export function useTimer({ setGameOver }) {
   // initialize timeLeft with the seconds prop
-  const [timeLeft, setTimeLeft] = useState(seconds)
+  const [timeLeft, setTimeLeft] = useState(USE_TIMER_INITIAL_STATE)
+  const [timerOn, setTimerOn] = useState(false)
+
+  const finishTimer = () => {
+    setTimerOn(false)
+  }
+
+  const runTimer = (seconds) => {
+    setTimeLeft(seconds)
+    setTimerOn(true)
+  }
 
   useEffect(() => {
+    if (!timerOn) return
+
+    if (timerOn && !timeLeft) return setGameOver(true) && setTimerOn(false)
+
     // exit early when we reach 0
-    if (!timeLeft) {
-      setEndGame(true)
-      return
-    }
+    if (!timeLeft) return
 
     // save intervalId to clear the interval when the
     // component re-renders
@@ -22,5 +34,5 @@ export function useTimer(seconds, setEndGame) {
     // add timeLeft as a dependency to re-rerun the effect
     // when we update it
   }, [timeLeft])
-  return { timeLeft, setTimeLeft }
+  return { timeLeft, runTimer, finishTimer }
 }

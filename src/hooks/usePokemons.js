@@ -1,31 +1,30 @@
-import { useEffect, useState } from 'react'
-import { getRandomNumbers } from '../utils'
-import { SearchPokemons } from '../services/search-pokemons'
+import { useState } from 'react'
+import { retrievePokemons } from 'src/services/retrieve-pokemons'
 
-export function usePokemons({ totalPokemons }) {
-  const randomsNum = getRandomNumbers({ totalPokemons })
-  const [pokemondata, setPokemondata] = useState(null)
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState(null)
-  const [refresh, setRefresh] = useState(false)
+export function usePokemons() {
+  const [loadingPokemons, setLoadingPokemons] = useState(false)
+  const [errorPokemons, setErrorPokemons] = useState(null)
 
-  const refreshPokemons = () => {
-    return setRefresh(true)
+  const shufflePokemonsList = (pokemons) => {
+    return pokemons.sort(() => Math.random() - 0.5)
+  }
+  const generateClones = (pokemons) => {
+    const clonedPokemons = [...pokemons, ...pokemons]
+    return clonedPokemons.map((item, index) => ({ ...item, id: index }))
+  }
+  const getPokemons = async () => {
+    try {
+      setLoadingPokemons(true)
+      const pokemons = await retrievePokemons()
+      const pokemonsWithClones = generateClones(pokemons)
+
+      return shufflePokemonsList(pokemonsWithClones)
+    } catch (e) {
+      setErrorPokemons(e.message)
+    } finally {
+      setLoadingPokemons(false)
+    }
   }
 
-  useEffect(() => {
-    if (refresh) {
-      setRefresh(false)
-    }
-    try {
-      setLoading(true)
-      SearchPokemons(randomsNum).then(setPokemondata)
-    } catch (err) {
-      setError(err)
-    } finally {
-      setLoading(false)
-    }
-  }, [setPokemondata, refresh])
-
-  return { pokemons: pokemondata, refreshPokemons, loading, error }
+  return { getPokemons, loadingPokemons, errorPokemons }
 }

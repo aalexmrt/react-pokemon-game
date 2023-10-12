@@ -29,7 +29,7 @@ main > section {
   display: grid;
   grid-template-columns: repeat(6, minmax(2rem, 11rem));
   grid-template-rows: repeat(2, 1fr);
-  gap: 1rem;
+  gap: 2rem;
 }
 
 main > section > div:nth-child(13) {

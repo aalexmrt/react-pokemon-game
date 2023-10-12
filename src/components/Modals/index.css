@@ -1,4 +1,4 @@
-.win-modal {
+.modal {
   background-color: #5c5c5c63;
   position: absolute;
   top: 0;
@@ -10,43 +10,40 @@
   height: 100vh;
   z-index: 50;
 }
-.box-win-msg {
-  background-color: #2f2f2f;
+.box-modal {
+  background-color: #dedede;
   display: flex;
   flex-direction: column;
-  row-gap: 6rem;
+  row-gap: 2rem;
   align-items: center;
   justify-content: center;
-  padding-left: 5.5rem;
-  padding-right: 5.5rem;
-  padding-top: 6.5rem;
-  padding-bottom: 6.5rem;
-  border-radius: 4%;
+  padding: 3.5rem;
+  border-radius: 0.5rem;
   font-size: 4rem;
+  color: black;
 }
 
 .btn-modal {
-  padding: 0.5rem;
-  padding-left: 1rem;
-  padding-right: 1rem;
-  border-radius: 1rem;
+  padding: 1rem;
+
+  border-radius: 0.5rem;
   font-size: 1.7rem;
   font-weight: 600;
   color: #000000;
-  background-color: #ffffff;
+  background-color: #e53b36;
   border: 0;
 }
 .btn-modal:hover {
-  transform: scale(1.1);
+  transform: scale(1.05);
 }
 
 @media screen and (max-width: 768px) {
-  .box-win-msg {
+  .box-modal {
     row-gap: 3rem;
     padding-left: 4rem;
     padding-right: 4rem;
   }
-  .box-win-msg > h1 {
+  .box-modal > h1 {
     font-size: 3rem;
   }
 }
