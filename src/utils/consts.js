@@ -1,4 +1,4 @@
-export const INITIAL_TIME = 6400
+export const INITIAL_TIME = 60
 
 export const GAME_MODAL_TYPES = {
   WIN: 'win',
