@@ -39,7 +39,11 @@ export const GameInfo = ({
       <div className="game-info__button-container">
         <button
           className="game-info__button game_info__button--reset-game"
-          onClick={() => handleResetGame() || setStatusButton(false)}
+          onClick={() =>
+            handleResetGame() ||
+            setStatusButton(false) ||
+            toggleDisableGameClick()
+          }
         >
           Reset
         </button>
