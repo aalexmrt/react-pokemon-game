@@ -1,5 +1,5 @@
 import { getListOfUniqueNumbers } from 'src/utils/utilities'
-import { TOTAL_POKEMONS } from 'src/utils/consts'
+
 const APIURL = 'https://pokeapi.co/api/v2/pokemon/'
 
 const getListOfPromises = async (listOfUniqueNumbers) => {
@@ -16,8 +16,8 @@ const getListOfPromises = async (listOfUniqueNumbers) => {
 const resolveListOfPromises = async (listOfPromises) => {
   return Promise.all(listOfPromises)
 }
-export async function retrievePokemons() {
-  const listOfUniqueNumbers = getListOfUniqueNumbers(TOTAL_POKEMONS)
+export async function retrievePokemons({ totalPokemons }) {
+  const listOfUniqueNumbers = getListOfUniqueNumbers(totalPokemons)
   const listOfPromises = await getListOfPromises(listOfUniqueNumbers)
   const listOfPokemons = await resolveListOfPromises(listOfPromises)
 

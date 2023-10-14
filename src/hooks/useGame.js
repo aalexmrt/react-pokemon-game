@@ -2,6 +2,7 @@ import { useEffect, useState, useCallback, useRef } from 'react'
 import { usePokemons } from 'src/hooks/usePokemons'
 import { useTimer } from 'src/hooks/useTimer'
 import { INITIAL_TIME, GAME_MODAL_TYPES } from 'src/utils/consts'
+import { getConfigurationGameBasedOnScreenWidth } from '../utils/utilities'
 
 export function useGame() {
   const { getPokemons } = usePokemons()
@@ -21,10 +22,10 @@ export function useGame() {
 
   const loadingFirstRender = useRef(true)
 
-  const updateCards = async () => {
+  const updateCards = async ({ totalPokemons }) => {
     try {
       setLoadingCards(true)
-      const newCards = await getPokemons()
+      const newCards = await getPokemons({ totalPokemons })
       setCards(newCards)
     } catch (e) {
       throw new Error(e.message)
@@ -126,7 +127,10 @@ export function useGame() {
 
   // First time of render, show the modal MENU and set `loadingFirstRender` to false
   if (loadingFirstRender.current) {
-    updateCards()
+    const configGame = getConfigurationGameBasedOnScreenWidth(window.innerWidth)
+    const { initialTime, totalPokemons } = configGame
+    console.log(totalPokemons)
+    updateCards({ totalPokemons })
     loadingFirstRender.current = false
   }
   // Check if game is over because of time out

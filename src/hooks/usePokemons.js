@@ -12,10 +12,10 @@ export function usePokemons() {
     const clonedPokemons = [...pokemons, ...pokemons]
     return clonedPokemons.map((item, index) => ({ ...item, id: index }))
   }
-  const getPokemons = async () => {
+  const getPokemons = async ({ totalPokemons }) => {
     try {
       setLoadingPokemons(true)
-      const pokemons = await retrievePokemons()
+      const pokemons = await retrievePokemons({ totalPokemons })
       const pokemonsWithClones = generateClones(pokemons)
 
       return shufflePokemonsList(pokemonsWithClones)

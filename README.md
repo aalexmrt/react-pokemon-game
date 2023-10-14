@@ -1,30 +1,34 @@
-# react-pokemon-game
+## Tasks for Version 1.0
 
+- [x] Ensure that showing and hiding images works correctly with the game logic.
+- [x] Disable clicking on cards that have already been matched.
+- [X] Show a modal when the game is over to display the final score.
+- [x] Display a score panel to show the current score and time remaining.
+- [X] Add confetti animation when the player wins the game.
+- [x] Create a starting menu.
+- [X] Check if the gameModalType is not in GAME_MODAL_TYPES.
+- [X] Configure the game to end when the player wins.
+- [x] Optimize the timer functionality to improve performance.
+- [X] Refactor the handleCardFlip function to use useCallback for better performance.
+- [X] Update the CSS styles to improve the visual design of the game.
+- [X] Add an initial page before the game starts instead of a modal.
+- [X] Add a pause button to allow the player to pause and resume the game.
+- [X] Ensure the game works well on different devices, including iPhone, iPad Air, full HD, and 2K screens.
 
+## Tasks for Future Versions
 
-- [x] Make sure show image and hide image works correctly with the logic of the game
-- [x] disable click when card is already matched
-- [X] show modal when game is over 
-- [x] show score panel
-- [X] add confetti when win game
-- [x] add a starting menu
-- [X] // TODO: check if gameModalType is not in GAME_MODAL_TYPES
-- [X] configure when win game
-- [x] figure out how to deal with the timer
-- [X] try to switch handleCardFlip to useCallback
-- [X] update styles
-- [X] add initial page before start game instead of modal
-- [ ] add transition to button of initial page and to the pokeball, redirecting to pokeAPI
-- [X] add pauseGame button
-- [ ] add small timeout to disable click on menu modal
-- [X] iphone: welcomePage, gamePage, modal
-- [X] ipadAir: welcomePage,
-- [X] fullHD
-- [ ] 2K
-- [ ] make it responsive
-- [ ] 
-- [ ] wait until cards are loaded to start timer
-- [ ] add levels increasing amount of pokemons and maybe reducing time
-- [ ] add sounds and background music
-- [ ] add mute and unmute button to enable sounds
-- [ ] add something to detect when the google font is charged and then show the items
+- [X] Create a test to check the game configuration based on screen width.
+- [ ] Add the initial time from the game configuration to the timer of the game.
+- [ ] Fix any failing tests and improve test coverage.
+- [ ] Add a small timeout to disable clicking on the menu modal to prevent accidental clicks.
+- [ ] Add a transition to the button on the initial page and to the pokeball, redirecting to the PokeAPI.
+- [ ] Implement sound effects and a button to enable/disable sounds.
+- [ ] Wait until all cards are loaded before starting the timer to prevent timing issues.
+- [ ] Add levels to increase the number of Pokemon and reduce the time limit.
+- [ ] Add background music to enhance the game experience.
+- [ ] Add a mute/unmute button to enable/disable sounds.
+- [ ] Add a loading indicator to detect when the Google font is loaded and then show the items.
+
+## Tasks for Version 2.0
+
+- [ ] Add levels to increase the difficulty of the game.  
