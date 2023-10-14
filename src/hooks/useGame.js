@@ -22,6 +22,7 @@ export function useGame() {
 
   const loadingFirstRender = useRef(true)
   const initialTimerValue = useRef(0)
+  const initialTotalPokemons = useRef(0)
 
   const updateCards = async ({ totalPokemons }) => {
     try {
@@ -105,7 +106,7 @@ export function useGame() {
 
   const handleResetGame = useCallback(() => {
     setCards([])
-    updateCards()
+    updateCards({ totalPokemons: initialTotalPokemons.current })
     setFlippedCards([])
     setMatchedCards([])
     setGameModal('')
@@ -115,6 +116,7 @@ export function useGame() {
   }, [])
 
   const handleStartGame = useCallback(() => {
+    updateCards({ totalPokemons: initialTotalPokemons.current })
     setGameModal('')
     setIsFirstGame(false)
     if (!loadingCards) runTimer(initialTimerValue.current)
@@ -130,7 +132,7 @@ export function useGame() {
   if (loadingFirstRender.current) {
     const configGame = getConfigurationGameBasedOnScreenWidth(window.innerWidth)
     const { initialTime, totalPokemons } = configGame
-    updateCards({ totalPokemons })
+    initialTotalPokemons.current = totalPokemons
     initialTimerValue.current = initialTime
     loadingFirstRender.current = false
   }
