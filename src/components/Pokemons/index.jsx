@@ -1,5 +1,7 @@
-import { Spinner } from 'src/components/Spinner'
+import { Spinner } from 'src/components/spinner'
+
 import pokeball from 'src/assets/pokeball.webp'
+
 import './styles.css'
 
 export function LoadSpinner() {

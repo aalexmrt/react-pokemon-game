@@ -1,9 +1,12 @@
-import './App.css'
 import { Pokemons } from 'src/components/pokemons'
 import { GameInfo } from 'src/components/game-info'
-import { useGame } from 'src/hooks/useGame'
 import { WelcomeMenu } from 'src/components/welcome-menu'
 import { GameModals } from 'src/components/game-modals'
+
+import { useGame } from 'src/hooks/useGame'
+
+import './App.css'
+
 export default function App() {
   const {
     gameOver,
