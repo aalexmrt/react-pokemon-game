@@ -1,6 +1,5 @@
 import { Spinner } from 'src/components/Spinner'
-import coverCard from 'src/assets/cover-card.jpeg'
-
+import pokeball from 'src/assets/pokeball.webp'
 import './styles.css'
 
 export function LoadSpinner() {
@@ -13,20 +12,30 @@ export function LoadSpinner() {
   )
 }
 export function PokemonCard({ pokemonItem, handleCardFlip, disableGameClick }) {
-  const { id, image, visible, pokemonId } = pokemonItem
+  const { id, image, visible, pokemonId, name } = pokemonItem
   const handleClick = (id) => {
-    handleCardFlip(id)
+    if (!visible && !disableGameClick) {
+      handleCardFlip(id)
+    }
   }
 
-  const styles = visible ? 'flipped' : null
-
-  const isClickable =
-    !visible && !disableGameClick ? (event) => handleClick(id) : null
+  const pokemonCardStyle = visible
+    ? 'pokemons__card pokemons__card--flipped '
+    : 'pokemons__card'
 
   return (
-    <div onClick={isClickable} className={`pokemon-card-rounded ${styles}`}>
-      <img className="front-card" src={coverCard}></img>
-      <img className="back-card" src={image} alt="pokemon-card"></img>
+    <div onClick={() => handleClick(id)} className={pokemonCardStyle}>
+      <img
+        className="pokemons__cover-img"
+        src={pokeball}
+        alt="image of a pokeball"
+      />
+
+      <img
+        className="pokemons__back-img"
+        src={image}
+        alt={`Pokemon ${name} with id ${pokemonId}`}
+      />
     </div>
   )
 }
@@ -35,17 +44,18 @@ export function ListOfPokemons({ pokemons, handleCardFlip, disableGameClick }) {
   if (pokemons === undefined) return
 
   return (
-    <>
+    <ul className="pokemons__list">
       {pokemons.map((item) => (
-        <div key={item.id} className="overflow-hidden">
+        <li key={item.id} className="pokemons__item">
           <PokemonCard
+            key={item.id}
             pokemonItem={item}
             handleCardFlip={handleCardFlip}
             disableGameClick={disableGameClick}
           />
-        </div>
+        </li>
       ))}
-    </>
+    </ul>
   )
 }
 
@@ -56,7 +66,7 @@ export function Pokemons({
   cards,
 }) {
   return (
-    <section>
+    <section className="pokemons">
       {loadingCards ? (
         <LoadSpinner />
       ) : (

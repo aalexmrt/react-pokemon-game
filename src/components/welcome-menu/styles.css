@@ -1,0 +1,109 @@
+.welcome-menu {
+  background-color: var(--primary-color);
+  color: var(--secondary-color);
+  font-family: Permanent Marker, sans-serif;
+  text-align: center;
+}
+
+.welcome-menu__container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+.welcome-menu__title {
+  font-size: 2.8rem;
+  max-width: 20rem;
+}
+.welcome-menu__img-container {
+  max-width: 10rem;
+}
+.welcome-menu__text {
+  font-size: 1.7rem;
+  max-width: 20rem;
+}
+.welcome-menu__button {
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  background-color: #f04037;
+  font-size: 1.6rem;
+  font-family: Permanent Marker, sans-serif;
+  color: var(--secondary-color);
+}
+.welcome-menu__button:hover {
+  transform: scale(1.02);
+  background-color: #ff2b21;
+}
+
+@media screen and (min-width: 576px) {
+  .welcome-menu {
+    display: grid;
+    height: 100vh;
+  }
+  .welcome-menu__container {
+    gap: 4rem;
+  }
+  .welcome-menu__title {
+    font-size: 3rem;
+    max-width: 38rem;
+  }
+  .welcome-menu__img-container {
+    max-width: 12rem;
+  }
+  .welcome-menu__text {
+    font-size: 2rem;
+    max-width: 25rem;
+  }
+  .welcome-menu__button {
+    font-size: 1.8rem;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .welcome-menu__title {
+    font-size: 4rem;
+    max-width: 50rem;
+  }
+  .welcome-menu__img-container {
+    max-width: 15rem;
+  }
+  .welcome-menu__text {
+    font-size: 2.5rem;
+    max-width: 40rem;
+  }
+}
+
+@media screen and (min-width: 1921px) {
+  .welcome-menu__title {
+    font-size: 5rem;
+    max-width: 60rem;
+  }
+  .welcome-menu__img-container {
+    max-width: 20rem;
+  }
+  .welcome-menu__text {
+    font-size: 3rem;
+    max-width: 50rem;
+  }
+  .welcome-menu__button {
+    font-size: 2rem;
+  }
+}
+@media screen and (min-width: 2561px) {
+  .welcome-menu__title {
+    font-size: 6rem;
+    max-width: 70rem;
+  }
+  .welcome-menu__img-container {
+    max-width: 25rem;
+  }
+  .welcome-menu__text {
+    font-size: 3.5rem;
+    max-width: 60rem;
+  }
+  .welcome-menu__button {
+    font-size: 2.5rem;
+  }
+}

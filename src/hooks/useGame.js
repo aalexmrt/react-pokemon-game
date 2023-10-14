@@ -11,10 +11,14 @@ export function useGame() {
   const [matchedCards, setMatchedCards] = useState([])
   const [flippedCards, setFlippedCards] = useState([])
   const [gameOver, setGameOver] = useState(false)
-  const { timeLeft, runTimer, finishTimer } = useTimer({ setGameOver })
-  const [gameModal, setGameModal] = useState('')
+  const { timeLeft, runTimer, toggleTimer } = useTimer({
+    setGameOver,
+  })
+  const [gameModalType, setGameModal] = useState('')
   const [win, setWin] = useState(false)
   const [disableGameClick, setDisableGameClick] = useState(false)
+  const [isFirstGame, setIsFirstGame] = useState(true)
+
   const loadingFirstRender = useRef(true)
 
   const updateCards = async () => {
@@ -28,6 +32,10 @@ export function useGame() {
       setLoadingCards(false)
     }
   }
+
+  const toggleDisableGameClick = useCallback(() => {
+    setDisableGameClick(!disableGameClick)
+  })
 
   const showCard = useCallback(
     (index) =>
@@ -72,7 +80,7 @@ export function useGame() {
         if (areAllCardsMatched) {
           setWin(true)
           setGameModal(GAME_MODAL_TYPES.WIN)
-          finishTimer()
+          toggleTimer()
         }
       }
 
@@ -90,7 +98,7 @@ export function useGame() {
 
       setFlippedCards([])
     },
-    [cards, flippedCards, matchedCards, finishTimer]
+    [cards, flippedCards, matchedCards, toggleTimer]
   )
 
   const handleResetGame = useCallback(() => {
@@ -106,6 +114,7 @@ export function useGame() {
 
   const handleStartGame = useCallback(() => {
     setGameModal('')
+    setIsFirstGame(false)
     if (!loadingCards) runTimer(INITIAL_TIME)
   }, [])
 
@@ -117,11 +126,9 @@ export function useGame() {
 
   // First time of render, show the modal MENU and set `loadingFirstRender` to false
   if (loadingFirstRender.current) {
-    setGameModal(GAME_MODAL_TYPES.MENU)
     updateCards()
     loadingFirstRender.current = false
   }
-
   // Check if game is over because of time out
   useEffect(() => {
     if (gameOver) {
@@ -134,15 +141,18 @@ export function useGame() {
     disableGameClick,
     matchedCards,
     timeLeft,
-    gameModal,
+    gameModalType,
     loadingCards,
     gameOver,
     loadingFirstRender,
     win,
+    isFirstGame,
     handleCardFlip,
     handleResetGame,
     showCard,
     showMenuGame,
     handleStartGame,
+    toggleTimer,
+    toggleDisableGameClick,
   }
 }

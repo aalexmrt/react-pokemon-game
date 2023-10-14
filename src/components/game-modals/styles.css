@@ -1,0 +1,83 @@
+.end-game-modal {
+  background-color: var(--primary-color);
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  place-content: center;
+  width: 100%;
+  height: 100vh;
+  z-index: 50;
+}
+.end-game-modal__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  row-gap: 4rem;
+  font-size: 4rem;
+  background-color: var(--primary-color);
+  color: var(--primary-color);
+}
+
+.end-game-modal__msg {
+  color: var(--secondary-color);
+  text-align: center;
+  line-height: 5.5rem;
+}
+
+.end-game-modal__button {
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  font-size: 1.6rem;
+
+  font-family: Permanent Marker, sans-serif;
+  color: var(--secondary-color);
+  background-color: var(--accent-color);
+}
+.end_game_modal__button:hover {
+  transform: scale(1.02);
+}
+
+@media screen and (min-width: 1920px) {
+}
+
+@media screen and (min-width: 576px) {
+  .end-game-modal__msg {
+    line-height: 7.5rem;
+    letter-spacing: 0.5rem;
+    font-size: 9rem;
+    width: 30rem;
+  }
+  .end-game-modal__button {
+    font-size: 1.9rem;
+    padding: 0.7rem;
+  }
+}
+@media screen and (min-width: 1024px) {
+  .end-game-modal__container {
+    row-gap: 8rem;
+  }
+  .end-game-modal__msg {
+    line-height: 8rem;
+    font-size: 11rem;
+  }
+  .end-game-modal__button {
+    font-size: 2.2rem;
+    padding: 0.85rem;
+  }
+}
+@media screen and (min-width: 1921px) {
+  .end-game-modal__container {
+    row-gap: 10rem;
+  }
+  .end-game-modal__msg {
+    line-height: 10rem;
+    font-size: 13rem;
+    width: 36rem;
+  }
+  .end-game-modal__button {
+    font-size: 2.5rem;
+    padding: 1rem;
+  }
+}

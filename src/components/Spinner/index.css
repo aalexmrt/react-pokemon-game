@@ -20,23 +20,23 @@
 }
 
 .lds-ring div:nth-child(5n + 1) {
-  background-color: var(--secondary-color);
+  background-color: var(--primary-color);
 }
 .lds-ring div:nth-child(5n + 2) {
   animation-delay: calc(0.1s);
-  background-color: var(--secondary-color);
+  background-color: var(--primary-color);
 }
 .lds-ring div:nth-child(5n + 3) {
   animation-delay: calc(0.2s);
-  background-color: var(--secondary-color);
+  background-color: var(--primary-color);
 }
 .lds-ring div:nth-child(5n + 4) {
   animation-delay: calc(0.2s);
-  background-color: var(--secondary-color);
+  background-color: var(--primary-color);
 }
 .lds-ring div:nth-child(5n + 5) {
   animation-delay: calc(0.4s);
-  background-color: var(--secondary-color);
+  background-color: var(--primary-color);
 }
 
 @keyframes bouncer {

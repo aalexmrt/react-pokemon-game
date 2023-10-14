@@ -1,0 +1,127 @@
+.game-info {
+  display: flex;
+  box-shadow: #f0f0f04a 0 1px 1px;
+  padding-bottom: 0.5rem;
+  padding-left: var(--xs-padding);
+  padding-right: var(--xs-padding);
+}
+.game-info__details-container {
+  display: flex;
+  place-content: center;
+  gap: 1rem;
+  width: 100%;
+  justify-content: space-between;
+  font-size: 1.5rem;
+}
+.game-info__scoring-container,
+.game-info__timer-container {
+  color: var(--secondary-color);
+  display: flex;
+  align-items: center;
+  text-align: center;
+  gap: 1rem;
+}
+
+.game-info__button {
+  display: none;
+  padding: 0.6rem;
+  border-radius: 0.5rem;
+  font-size: 1.4rem;
+  font-family: Permanent Marker, sans-serif;
+
+  color: var(--secondary-color);
+  background-color: var(--accent-color);
+}
+.game-info__button:hover {
+  transform: scale(1.02);
+  background-color: var(--accent-color-strong);
+}
+.game-info__timer-title,
+.game-info__scoring-title {
+  font-size: 1.2rem;
+}
+.game-info__scoring-value,
+.game-info__timer-value {
+  color: var(--accent-color);
+  font-size: 2rem;
+  width: 2rem;
+}
+
+@media screen and (min-width: 1920px) {
+}
+
+@media screen and (min-width: 576px) {
+  .game-info {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    padding: 0.8rem;
+    padding-left: var(--sm-padding);
+    padding-right: var(--sm-padding);
+    justify-content: space-between;
+    align-items: center;
+  }
+  .game-info__details-container {
+    width: unset;
+    gap: 3rem;
+  }
+  .game-info__scoring-container,
+  .game-info__timer-container {
+    flex-direction: row;
+    align-content: center;
+    place-items: center;
+    gap: 2rem;
+  }
+
+  .game-info__button {
+    display: block;
+  }
+  .game-info__button-container {
+    place-self: end;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .game-info {
+    padding: 1rem;
+    padding-left: var(--lg-padding);
+    padding-right: var(--lg-padding);
+  }
+  .game-info__details-container {
+    font-size: 1.8rem;
+    gap: 10rem;
+  }
+  .game-info__scoring-title,
+  .game-info__timer-title {
+    font-size: 2.2rem;
+  }
+  .game-info__scoring-value,
+  .game-info__timer-value {
+    font-size: 2.8rem;
+  }
+  .game-info__button {
+    padding: 1rem;
+    font-size: 1.8rem;
+  }
+}
+@media screen and (min-width: 1921px) {
+  .game-info {
+    padding: 1rem;
+    padding-left: var(--two-xl-padding);
+    padding-right: var(--two-xl-padding);
+  }
+  .game-info__details-container {
+    font-size: 2.2rem;
+    gap: 10rem;
+  }
+  .game-info__scoring-title,
+  .game-info__timer-title {
+    font-size: 2.8rem;
+  }
+  .game-info__scoring-value,
+  .game-info__timer-value {
+    font-size: 3.4rem;
+  }
+  .game-info__button {
+    font-size: 2.2rem;
+  }
+}

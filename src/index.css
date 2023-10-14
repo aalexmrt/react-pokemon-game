@@ -1,31 +1,15 @@
-:root {
-  font-family: 'Poppins', sans-serif;
-  font-size: 16px;
-  font-weight: 400;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-text-size-adjust: 100%;
-
-  scroll-behavior: smooth;
-
-  --primary-color: #2f2f2f;
-  --secondary-color: #ef5350;
-  --default-color: #eeeeee;
-}
-:root {
-  color: var(--default-color);
-  background-color: var(--primary-color);
-}
 html {
-  background-color: var(--primary-color);
   overflow-y: scroll;
 }
 
-#root {
-  background-color: var(--primary-color);
+@font-face {
+  font-family: 'Permanent Marker';
+  src: url(https://fonts.gstatic.com/s/permanentmarker/v16/Fh4uPib9Iyv2ucM6pGQMWimMp004La2Cf5b6jlg.woff2)
+    format('woff2');
+  font-display: block;
+}
+body {
+  font-family: Permanent Marker, sans-serif;
 }
 
 * {
@@ -37,6 +21,22 @@ html {
 /* Make images easier to work with */
 img,
 picture {
-  max-width: 100%;
+  width: 100%;
   display: block;
+}
+
+button {
+  background-color: transparent;
+  border: none;
+  margin: 0;
+  padding: 0;
+  text-align: inherit;
+  font: inherit;
+  border-radius: 0;
+  appearance: none;
+}
+
+ul {
+  padding: 0;
+  list-style: none;
 }

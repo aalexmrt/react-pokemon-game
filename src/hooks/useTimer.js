@@ -6,8 +6,8 @@ export function useTimer({ setGameOver }) {
   const [timeLeft, setTimeLeft] = useState(USE_TIMER_INITIAL_STATE)
   const [timerOn, setTimerOn] = useState(false)
 
-  const finishTimer = () => {
-    setTimerOn(false)
+  const toggleTimer = () => {
+    setTimerOn(!timerOn)
   }
 
   const runTimer = (seconds) => {
@@ -33,6 +33,6 @@ export function useTimer({ setGameOver }) {
     return () => clearInterval(intervalId)
     // add timeLeft as a dependency to re-rerun the effect
     // when we update it
-  }, [timeLeft])
-  return { timeLeft, runTimer, finishTimer }
+  }, [timeLeft, timerOn])
+  return { timeLeft, runTimer, toggleTimer }
 }
