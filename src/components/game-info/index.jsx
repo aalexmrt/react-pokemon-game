@@ -18,7 +18,7 @@ export const GameInfo = ({
   const score = matchedCards.length / 2 // matchedCards has both original and cloned pokemon so we divide by 2
   return (
     <section className="game-info">
-      <div style={{ flexGrow: 1 }}>
+      <div>
         <button
           className="game-info__button game-info__button--pause-game"
           onClick={handleToggleTimer}
@@ -26,7 +26,7 @@ export const GameInfo = ({
           {statusButton ? 'Resume' : 'Pause'}
         </button>
       </div>
-      <div style={{ flexGrow: 1 }} className="game-info__details-container">
+      <div className="game-info__details-container">
         <div className="game-info__timer-container">
           <h2 className="game-info__timer-title">Time</h2>
           <span className="game-info__timer-value">{timeLeft}</span>
@@ -38,9 +38,8 @@ export const GameInfo = ({
       </div>
       <div className="game-info__button-container">
         <button
-          style={{ flexGrow: 1 }}
           className="game-info__button game_info__button--reset-game"
-          onClick={handleResetGame}
+          onClick={() => handleResetGame() || setStatusButton(false)}
         >
           Reset
         </button>

@@ -19,6 +19,7 @@
 
 - [X] Create a test to check the game configuration based on screen width.
 - [X] When pressing reset button breaks the app.
+- [ ] Refresh pause button when pressing reset.
 - [ ] Add the initial time from the game configuration to the timer of the game.
 - [ ] Fix any failing tests and improve test coverage.
 - [ ] Add a small timeout to disable clicking on the menu modal to prevent accidental clicks.
