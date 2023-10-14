@@ -1,4 +1,4 @@
-import { getListOfUniqueNumbers } from 'src/utils/'
+import { getListOfUniqueNumbers } from 'src/utils/utilities'
 import { TOTAL_POKEMONS } from 'src/utils/consts'
 const APIURL = 'https://pokeapi.co/api/v2/pokemon/'
 
