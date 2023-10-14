@@ -1,8 +1,8 @@
 import { useEffect, useState, useCallback, useRef } from 'react'
 import { usePokemons } from 'src/hooks/usePokemons'
 import { useTimer } from 'src/hooks/useTimer'
-import { INITIAL_TIME, GAME_MODAL_TYPES } from 'src/utils/consts'
-import { getConfigurationGameBasedOnScreenWidth } from '../utils/utilities'
+import { GAME_MODAL_TYPES } from 'src/utils/consts'
+import { getConfigurationGameBasedOnScreenWidth } from 'src/utils/utilities'
 
 export function useGame() {
   const { getPokemons } = usePokemons()
@@ -21,6 +21,7 @@ export function useGame() {
   const [isFirstGame, setIsFirstGame] = useState(true)
 
   const loadingFirstRender = useRef(true)
+  const initialTimerValue = useRef(0)
 
   const updateCards = async ({ totalPokemons }) => {
     try {
@@ -110,13 +111,13 @@ export function useGame() {
     setGameModal('')
     setGameOver(false)
     setWin(false)
-    if (!loadingCards) runTimer(INITIAL_TIME)
+    if (!loadingCards) runTimer(initialTimerValue.current)
   }, [])
 
   const handleStartGame = useCallback(() => {
     setGameModal('')
     setIsFirstGame(false)
-    if (!loadingCards) runTimer(INITIAL_TIME)
+    if (!loadingCards) runTimer(initialTimerValue.current)
   }, [])
 
   // Starting game for   first time
@@ -129,8 +130,8 @@ export function useGame() {
   if (loadingFirstRender.current) {
     const configGame = getConfigurationGameBasedOnScreenWidth(window.innerWidth)
     const { initialTime, totalPokemons } = configGame
-    console.log(totalPokemons)
     updateCards({ totalPokemons })
+    initialTimerValue.current = initialTime
     loadingFirstRender.current = false
   }
   // Check if game is over because of time out
