@@ -11,6 +11,6 @@ export const GAME_CONFIG_BASED_ON_SCREEN = {
   1920: { initialTime: 80, totalPokemons: 14 },
   1024: { initialTime: 70, totalPokemons: 12 },
   576: { initialTime: 60, totalPokemons: 8 },
-  390: { initialTime: 20, totalPokemons: 6 },
+  428: { initialTime: 20, totalPokemons: 6 },
 }
 export const USE_TIMER_INITIAL_STATE = 0

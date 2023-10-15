@@ -3,6 +3,7 @@
   color: var(--secondary-color);
   font-family: Permanent Marker, sans-serif;
   text-align: center;
+  padding-top: 2rem;
 }
 
 .welcome-menu__container {
@@ -62,6 +63,9 @@
 }
 
 @media screen and (min-width: 1024px) {
+  .welcome-menu {
+    padding-top: 0;
+  }
   .welcome-menu__title {
     font-size: 4rem;
     max-width: 50rem;
