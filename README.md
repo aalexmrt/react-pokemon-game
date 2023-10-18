@@ -19,9 +19,10 @@
 
 - [X] Create a test to check the game configuration based on screen width.
 - [X] When pressing reset button breaks the app.
-- [ ] Refresh pause button when pressing reset.
-- [ ] Add the initial time from the game configuration to the timer of the game.
-- [ ] Fix any failing tests and improve test coverage.
+- [X] Refresh pause button when pressing reset.
+- [X] Add the initial time from the game configuration to the timer of the game.
+- [X] Fix any failing tests and improve test coverage.
+- [ ] Check responsive cases.
 - [ ] Add a small timeout to disable clicking on the menu modal to prevent accidental clicks.
 - [ ] Add a transition to the button on the initial page and to the pokeball, redirecting to the PokeAPI.
 - [ ] Implement sound effects and a button to enable/disable sounds.
